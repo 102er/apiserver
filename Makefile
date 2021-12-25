@@ -9,3 +9,6 @@ gp:
 ggp:
 	protoc  --gogo_out=paths=source_relative:. \
 			 api/v1/hello_world.proto
+
+generate:
+	wire ./cmd

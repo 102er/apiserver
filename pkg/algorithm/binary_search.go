@@ -3,6 +3,7 @@ package algorithm
 /*
 给定一个个元素有序的（升序）整型数组nums 和一个目标值 target，写一个函数搜索nums中的 target，如果目标值存在返回下标，否则返回 -1。
 */
+//第一个匹配中的位置
 func binarySearch(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
@@ -18,6 +19,7 @@ func binarySearch(nums []int, target int) int {
 	return -1
 }
 
+//左边界
 func binarySearchLeftBound(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
@@ -37,6 +39,7 @@ func binarySearchLeftBound(nums []int, target int) int {
 	return left
 }
 
+//有边界
 func binarySearchRightBound(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
