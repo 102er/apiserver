@@ -22,7 +22,7 @@ func TestSigner_Sing(t *testing.T) {
 		return
 	}
 	fmt.Println(r.Header)
-	client := http.DefaultClient
+	/*client := http.DefaultClient
 	resp, err := client.Do(r)
 	if err != nil {
 		t.Error(err)
@@ -35,5 +35,5 @@ func TestSigner_Sing(t *testing.T) {
 	}
 	t.Log(resp.Request)
 	t.Log(resp)
-	t.Log(string(body))
+	t.Log(string(body))*/
 }

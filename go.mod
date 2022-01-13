@@ -12,12 +12,13 @@ require (
 	github.com/nicksnyder/go-i18n/v2 v2.1.2
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/text v0.3.6
+	google.golang.org/protobuf v1.27.1
 )
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/golang/protobuf v1.3.3 // indirect
+	github.com/golang/protobuf v1.5.0 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.12 // indirect
