@@ -9,11 +9,24 @@ import (
 
 var (
 	key = "1234567890abcdef"
-	iv  = "ae0494f008333659"
+	iv  = "xxxxxxxxxxxxxxxx"
 )
 
-func AesEncryptNoBase64(data []byte) (string, error) {
-	return newAESCBCCipher(key, iv).AESCBCBase64Encode(data)
+func AesEncryptBase64(data []byte) (string, error) {
+	_data, err := newAESCBCCipher(key, iv).encode(data)
+	if err != nil {
+		return "", err
+	}
+
+	return base64.StdEncoding.EncodeToString(_data), nil
+}
+
+func AesDecodeBase64(data []byte) (string, error) {
+	_data, err := base64.StdEncoding.DecodeString(string(data))
+	if err != nil {
+		return "", err
+	}
+	return newAESCBCCipher(key, iv).decode(_data)
 }
 
 type AESCBCCipher struct {
@@ -27,27 +40,23 @@ func newAESCBCCipher(key, iv string) *AESCBCCipher {
 	}
 }
 
-// AESCBCBase64Encode 开始加密
-func (a *AESCBCCipher) AESCBCBase64Encode(_data []byte) (string, error) {
+// Encode 开始加密
+func (a *AESCBCCipher) encode(_data []byte) ([]byte, error) {
 	_key := []byte(a.Key)
 	_iv := []byte(a.IV)
 
 	_data = PKCS7Padding(_data)
 	block, err := aes.NewCipher(_key)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	mode := cipher.NewCBCEncrypter(block, _iv)
 	mode.CryptBlocks(_data, _data)
-	return base64.StdEncoding.EncodeToString(_data), nil
+	return _data, nil
 }
 
 // AESCBCBase64Decode 开始解密
-func (a *AESCBCCipher) AESCBCBase64Decode(data string) (string, error) {
-	_data, err := base64.StdEncoding.DecodeString(data)
-	if err != nil {
-		return "", err
-	}
+func (a *AESCBCCipher) decode(_data []byte) (string, error) {
 	_key := []byte(a.Key)
 	_iv := []byte(a.IV)
 
